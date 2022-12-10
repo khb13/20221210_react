@@ -304,3 +304,12 @@ let totalAge = ageArr.reduce((acc, curr) => acc + curr, 100);
 console.log(totalAge);
 
 //find는 1개만 반환하고 filter는 배열로 반환함
+
+//rest 문법 : 매개 변수에 ...을 붙이면 전달된 인자가 몇 개이던 배열로 모아준다.
+// → 무조건 매개 변수의 마지막에 사용해야 함.
+function getTotal(v, d, f, ...numList){ //순서를 주의해야 함.
+  // arguments 얘는 유사 배열
+  return numList.reduce((acc, curr) => acc+curr); 
+}
+
+console.log(getTotal(1,2,3,4,5))

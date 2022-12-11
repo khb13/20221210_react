@@ -12,20 +12,14 @@ function Todo() {
         {id: 1, text:"투두리스트 만들기", date:"2022/12/10", done:true},
         ]);
 
-    
     //useMemo : 특정 값이 변할 때만 연산을 하고 나머지 경우는 기존 값을 재사용 한다.
     const undoneTodoCount = useMemo(()=>countUndoneTodo(todos), [todos]);
     console.log(undoneTodoCount);
-
-
 
     //useRef로 관리되는 값은 변경되어도 리렌더링이 발생하지 않는다. → 렌더링과 별개로 변수처럼 사용한다.
     const nextId = useRef(2);
     //↑ 얘는 렌더링이 일어나도 변하지 않음.
 
-    
-
-    
     const handleSubmit = (inputs) => {
         //객체나 배열을 업데이트 할 때는 불변성을 지켜야한다. → 지키지 않으면 상태 변화를 감지할 수 없다.
         // setTodos([...todos, input]); //스프레드 사용하는 것을 잊지 말 것!

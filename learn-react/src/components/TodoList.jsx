@@ -1,7 +1,6 @@
 function TodoList({todos, onToggle, onRemove}) {
     return(
         <>
-    
         <ul>
                 {todos.map((todo) => (
                     <li key={todo.id} 

@@ -1,7 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from "react";
 
-
-
 function TodoInput({handleSubmit}){
 
     const [inputs, setInputs] = useState({
@@ -20,7 +18,6 @@ function TodoInput({handleSubmit}){
         },
         [inputs]
     );
-
 
     return <div>
         <input /*여기 있는 인풋을 들고오는 것임.*/

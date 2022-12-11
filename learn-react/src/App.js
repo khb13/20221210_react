@@ -1,6 +1,7 @@
-import Hello from "./components/Hello";
+// import Hello from "./components/Hello";
 import "./App.css";
-import Counter from "./components/Counter"
+import TodoInput from "./components/TodoInput";
+// import Counter from "./components/Counter"
 
 function App() {
 
@@ -15,18 +16,20 @@ function App() {
   */
 
     //새롭게 pull하면 npm i 해서 인스톨 해줘야함
- const name = "seok";
- const style = {
-  color: "red", backgroundColor: "palegreen"
+//  const name = "seok";
+//  const style = {
+//   color: "red", backgroundColor: "palegreen"
 
- }
+//  }
   return (
     <>
       
       {/* 조건부 렌더링
       {true && <Hello />} */}
       
-      <Counter />
+      {/* <Counter /> */}
+
+      <TodoInput />
     </>
   );
 }

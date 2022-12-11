@@ -1,5 +1,6 @@
 import Hello from "./components/Hello";
 import "./App.css";
+import Counter from "./components/Counter"
 
 function App() {
 
@@ -21,10 +22,11 @@ function App() {
  }
   return (
     <>
-      <Hello />
-      <p style={style} className="content">
-        안녕하세요. {name}
-        </p>
+      
+      {/* 조건부 렌더링
+      {true && <Hello />} */}
+      
+      <Counter />
     </>
   );
 }

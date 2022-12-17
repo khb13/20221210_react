@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { useCallback, useRef, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
@@ -6,6 +7,8 @@ const initialState = [
     {id: 1, text: "useState 배우기", done: true},
     {id: 2, text: "Todo List 만들기", done: false},
 ];
+
+export const RemoveContext = createContext(null);
 
 function Todos() {
     //상태 관리를 할 상위 컴포넌트
@@ -32,10 +35,13 @@ function Todos() {
     );
 
     return (
-        <div>
-            <TodoInput onCreate={onCreate}/>
-            <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle}/>
-        </div>
+        <RemoveContext.Provider value={onRemove}>
+            <div>
+                <TodoInput onCreate={onCreate}/>
+                <TodoList todos={todos} onToggle={onToggle}/>
+            </div>  
+        </RemoveContext.Provider>
+        
     );
 
 }

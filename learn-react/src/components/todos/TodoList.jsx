@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { RemoveContext } from "./Todos";
 
 function TodoList({todos, onRemove, onToggle}) {
     //Todo 리스트를 출력 (삭제, 토글)
@@ -10,15 +11,21 @@ function TodoList({todos, onRemove, onToggle}) {
     return(
         <ul>
             {todos.map(todo => (
-                <TodoItem key={todo.id} todo={todo} onRemove={onRemove} onToggle={onToggle}/>
+                <TodoItem 
+                key={todo.id} 
+                todo={todo} 
+                onRemove={onRemove} 
+                onToggle={onToggle}/>
             ))}
 
         </ul>
     )
 }
 
-function TodoItem({todo, onRemove, onToggle}){
+function TodoItem({todo, onToggle}){
     
+    const onRemove = useContext(RemoveContext);
+
     const {text, id, done} = todo;
     
     const handleRemove = () => {

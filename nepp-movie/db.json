@@ -1,0 +1,14 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "text": "json 서버 설치하기",
+      "done": true
+    },
+    {
+      "id": 2,
+      "text": "axios 설치하기",
+      "done": true
+    }
+  ]
+}

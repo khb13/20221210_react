@@ -120,5 +120,43 @@ function Hello(){
 }
 ```
 
+---
 
+## REST API
+
+API : Application Programming Interface
+어플리케이션 간의 통신 방법
+
+REST API : Representational State Transfer API의 약자. 자원의 상태를 자원에 대한 표현으로 주고 받는 모든 것
+자원(Resource), 메서드, 표현(Representation)
+
+ex) GET https://www.api-com/todos
+ex) GET https://www.api-com/todos/1
+
+메서드의 종류 : GET, POST, PUT(전체 수정), PATCH(일부분 수정), DELETE
+
+---
+
+## json-server
+
+json-server : json 파일에 저장된 정보를 주고받는 가상의 REST API를 만들어주는 라이브러리.
+
+설치
+```
+npm install -g json-server
+```
+실행
+```
+json-server 파일경로 --port 포트번호
+```
+
+## Axios
+
+JS에서 http 통신을 도와주는 라이브러리.
+별도의 설치가 필요하다.
+
+설치
+```
+npm install axios
+```
 

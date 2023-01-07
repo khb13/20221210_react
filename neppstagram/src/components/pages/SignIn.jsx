@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { signIn } from "../../api/admin";
 import { useInputs } from "../../hooks/useInputs";
 import AdminForm from "../admin/AdminForm";
 import { Button } from "../common/button";
-import { Input } from "../common/Input";
+import { Input } from "../common/input";
 
 function SignIn() {
   const [inputs, handleInputs] = useInputs({
@@ -10,10 +12,22 @@ function SignIn() {
     password: "",
   });
 
-  const { email, password } = inputs;
+  const navigate = useNavigate();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    signIn(inputs).then((res) => {
+      window.localStorage.setItem("access-token", res.data.data.token);
+      navigate("/");
+    });
+  };
+
+  const toSignUp = () => {
+    navigate("/signup");
+  };
 
   return (
-    <AdminForm title="로그인">
+    <AdminForm title="로그인" onSubmit={onSubmit}>
       <InputWrapper>
         <Input
           type="email"
@@ -30,7 +44,7 @@ function SignIn() {
       </InputWrapper>
       <BtnWrapper>
         <Button bgColor="#999">로그인</Button>
-        <Button>회원가입</Button>
+        <Button onClick={toSignUp}>회원가입</Button>
       </BtnWrapper>
     </AdminForm>
   );

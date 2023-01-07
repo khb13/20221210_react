@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-function AdminForm({ title, children }) {
+function AdminForm({ title, children, onSubmit }) {
   return (
     <Container>
-      <Form noValidate onSubmit={onsubmit}>
+      <Form noValidate onSubmit={onSubmit}>
         <Title>{title}</Title>
         {children}
       </Form>

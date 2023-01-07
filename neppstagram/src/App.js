@@ -1,5 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import NavBar from "./components/common/NavBar";
+import Edit from "./components/pages/Edit";
+import Home from "./components/pages/Home";
+import Main from "./components/pages/Main";
+import Profile from "./components/pages/Profile";
+import Search from "./components/pages/Search";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 
@@ -8,6 +14,12 @@ function App() {
     <Container>
       <Wrapper>
         <Routes>
+          <Route path="/*" element={<Main />}>
+            <Route path="home" element={<Home />} />
+            <Route path="search" element={<Search />} />
+            <Route path="Edit" element={<Edit />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
         </Routes>

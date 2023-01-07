@@ -3,7 +3,7 @@ import { postUser } from "../../api/admin";
 import { useInputs } from "../../hooks/useInputs";
 import AdminForm from "../admin/AdminForm";
 import { Button } from "../common/button";
-import { Input } from "../common/Input";
+import { Input } from "../common/input";
 
 function SignUp() {
   const [inputs, handleInputs] = useInputs({
@@ -20,6 +20,7 @@ function SignUp() {
     e.preventDefault();
 
     if (!active) return;
+    
     postUser(inputs).then((res) => console.log(res));
   };
 

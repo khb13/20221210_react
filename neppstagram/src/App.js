@@ -15,9 +15,11 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/*" element={<Main />}>
-            <Route path="home" element={<Home />} />
+            <Route path="" element={<Home />} />
             <Route path="search" element={<Search />} />
-            <Route path="Edit" element={<Edit />} />
+            <Route path="Edit" element={<Edit />}>
+              <Route path=":id" element={<Edit />} />
+            </Route>
             <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="signin" element={<SignIn />} />

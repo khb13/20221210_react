@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { RxPlus } from "react-icons/rx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../common/button";
-import { postPost } from "../../api/admin";
+import { converUrl, getPostById, postPost } from "../../api/admin";
+import { useParams } from "react-router-dom";
 
 function Edit() {
+  const { id } = useParams();
   const [inputs, setInputs] = useState({
     content: "",
     images: [],
@@ -57,11 +59,30 @@ function Edit() {
     postPost(form).then((res) => console.log(res));
   };
 
-  console.log(inputs);
+  useEffect(() => {
+    if (id) {
+      getPostById(id).then((data) => {
+        setPost(data);
+        setInputs((inputs) => ({ ...inputs, content: data.content }));
+
+        setPreviewUrls([...data.img_list.map((img) => img.url)]);
+
+        Promise.all(
+          data.img_list
+            .map((img) => {
+              const file = converUrl(img.url);
+              return file;
+            })
+            .then((res) => console.log(res))
+        );
+      });
+    }
+  }, [id]);
   return (
     <Container>
       <Textarea
         placeholder="글을 입력해주세요."
+        value={inputs.content}
         onChange={(e) =>
           setInputs((inputs) => ({ ...inputs, content: e.target.value }))
         }

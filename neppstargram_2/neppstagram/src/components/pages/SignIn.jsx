@@ -20,13 +20,18 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await singIn(inputs);
+    try {
+      await singIn(inputs);
 
-    const user = await getCurrentUser();
+      const user = await getCurrentUser();
 
-    dispatch(user.id);
+      dispatch(user.id);
 
-    navigate("/");
+      navigate("/");
+    } catch (err) {
+      //alert(err.response)
+      console.log(err.response.data.message);
+    }
   };
 
   const toSignUp = () => {

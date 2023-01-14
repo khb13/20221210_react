@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
+import { useMutation, useQueries, useQuery } from "react-query";
 import styled from "styled-components";
+import { client } from "../..";
 import { deleteComment, getComments, postComment } from "../../api/admin";
 import { useUserId } from "../../data/auth";
 
 function CommentList({ postId }) {
   console.log(postId);
   const [page, setPage] = useState(1);
-  const [commentList, setCommentList] = useState([]);
+  // const [commentList, setCommentList] = useState([]);
   const [input, setInput] = useState("");
 
   const currentUserId = useUserId();
@@ -21,20 +23,26 @@ function CommentList({ postId }) {
 
   // 등록하는 함수 만들기
 
-  const getData = useCallback(() => {
-    getComments(postId, page).then((data) =>
-      setCommentList((commentList) => [...commentList, ...data])
-    );
-  }, [postId, page]);
+  const commentMustaion = useMutation(postComment, {
+    onSuccess: () => {
+      client.invalidateQueries("comments");
+    },
+  });
 
-  const handleSubmit = async () => {
-    if (input.length === 0) {
-      alert("댓글을 입력해주세요.");
-      return;
+  const { data, isLoading, error } = useQuery(
+    "comments",
+    () => getComments(postId, page),
+    {
+      onSuccess: (data) => console.log(data),
     }
-    const result = await postComment({ postId, content: input });
+  );
 
-    setCommentList([result, ...commentList]);
+  const commentDeletMutation = useMutation(deleteComment, {
+    onSuccess: () => client.invalidateQueries("comments"),
+  });
+
+  const handleSubmit = () => {
+    commentMustaion.mutate({ postId, content: input });
   };
 
   const handleDelete = async (commentId) => {
@@ -42,16 +50,14 @@ function CommentList({ postId }) {
 
     await deleteComment(commentId);
 
-    setCommentList(commentList.filter((comment) => comment.id !== commentId));
+    commentDeletMutation.mutate(commentId);
   };
 
-  useEffect(() => {
-    getData();
-  }, [getData]);
+  if (isLoading) return <div>로딩 중</div>;
 
   return (
     <Container>
-      {commentList.map((comment) => (
+      {data.map((comment) => (
         <CommentItem key={comment.id}>
           <p>{comment.content}</p>
           {currentUserId === comment.author.id && (

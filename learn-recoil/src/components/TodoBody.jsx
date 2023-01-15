@@ -1,14 +1,17 @@
+import { useSelector } from "react-redux";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { filterState, filterTodosState, todosState } from "../state/todos";
 import TodoItem from "./TodoItem";
 
 function TodoBody() {
-  const todos = useRecoilValue(filterTodosState);
-  const setFilterState = useSetRecoilState(filterState);
+  // const todos = useRecoilValue(filterTodosState);
+  // const setFilterState = useSetRecoilState(filterState);
+  const todos = useSelector((state) => state.todos);
+
 
   return (
     <div>
-      <label htmlFor="">
+      {/* <label htmlFor="">
         done
         <input
           type="radio"
@@ -28,7 +31,7 @@ function TodoBody() {
           value="undone"
           onChange={(e) => setFilterState(e.target.value)}
         />
-      </label>
+      </label> */}
       <ul>
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />

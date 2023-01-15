@@ -1,3 +1,5 @@
+import Counter from "./components/Counter";
+import Main from "./components/Main";
 import TodoBody from "./components/TodoBody";
 import TodoHeader from "./components/TodoHeader";
 import TodoInput from "./components/TodoInput";
@@ -8,6 +10,10 @@ function App() {
       <TodoHeader />
       <TodoInput />
       <TodoBody />
+
+      <Counter />
+
+      <Main />
     </div>
   );
 }
